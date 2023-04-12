@@ -1,6 +1,7 @@
 
 //For complete script with GIS relation with Sound Velocity calculation please write me ingenieria@prismatiklab.com
 -> Adiabatic State Equation for Acoustic Airborne Propagation bassed in Geographical Information Systems GIS.//
+MSc. Juan Manuel Medina S. 
 
 
 function saturationVaporPressure(temperature) {
