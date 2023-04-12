@@ -1,6 +1,3 @@
-const API_KEY = 'x';
-const LATITUDE = L;
-const LONGITUDE =  Lo;
 
 function saturationVaporPressure(temperature) {
   ... saturation vapour pressure of water vapour over liquid...;
