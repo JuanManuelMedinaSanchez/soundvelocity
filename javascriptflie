@@ -1,0 +1,31 @@
+const API_KEY = 'x';
+const LATITUDE = L;
+const LONGITUDE =  Lo;
+
+function saturationVaporPressure(temperature) {
+  return 611.2 * Math.exp(17.67 * (temperature - 273.15) / (temperature - 29.65));
+}
+
+function soundVelocity(pressure, humidity, temperature) {
+  const e_s = saturationVaporPressure(temperature);
+  const e = humidity / 100 * e_s;
+  const P_w = e;
+  const P_adj = pressure - P_w;
+  const k = 1.4 - 0.4 * (P_w / pressure);
+  const rho_dry = P_adj / (287.058 * temperature);
+  const rho = rho_dry / (1 + 0.622 * e / P_adj);
+  const c = Math.sqrt(k * 287.058 * temperature);
+  return { c, rho, P_adj };
+}
+
+fetch(`API`)
+  .then(response => response.json())
+  .then(data => {
+    const temperature = data.main.temp;
+    const humidity = data.main.humidity;
+    const pressure = data.main.pressure;
+    const { c, rho, P_adj } = soundVelocity(pressure * 100, humidity, temperature + 273.15);
+    console.log(`- c: ${c.toFixed(2)} m/s`);
+
+  })
+  .catch(error => console.error(error))
