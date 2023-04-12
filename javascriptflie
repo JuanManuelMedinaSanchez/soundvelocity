@@ -3,7 +3,7 @@ const LATITUDE = L;
 const LONGITUDE =  Lo;
 
 function saturationVaporPressure(temperature) {
-  return 611.2 * Math.exp(17.67 * (temperature - 273.15) / (temperature - 29.65));
+  ... saturation vapour pressure of water vapour over liquid...;
 }
 
 function soundVelocity(pressure, humidity, temperature) {
@@ -11,9 +11,9 @@ function soundVelocity(pressure, humidity, temperature) {
   const e = humidity / 100 * e_s;
   const P_w = e;
   const P_adj = pressure - P_w;
-  const k = 1.4 - 0.4 * (P_w / pressure);
-  const rho_dry = P_adj / (287.058 * temperature);
-  const rho = rho_dry / (1 + 0.622 * e / P_adj);
+  const k = ...adjust the adiabatic equation;
+  const rho_dry = ...adjust the air density;
+  const rho;
   const c = Math.sqrt(k * 287.058 * temperature);
   return { c, rho, P_adj };
 }
@@ -24,7 +24,7 @@ fetch(`API`)
     const temperature = data.main.temp;
     const humidity = data.main.humidity;
     const pressure = data.main.pressure;
-    const { c, rho, P_adj } = soundVelocity(pressure * 100, humidity, temperature + 273.15);
+    const { c, rho, P_adj } = soundVelocity();
     console.log(`- c: ${c.toFixed(2)} m/s`);
 
   })
